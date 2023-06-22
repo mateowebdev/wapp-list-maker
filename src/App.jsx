@@ -1,0 +1,44 @@
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+
+import Header from "./components/header/Header";
+import Main from "./components/main/Main";
+import Footer from "./components/footer/Footer";
+
+import fondo from "./assets/wapp-bg.png";
+
+function App() {
+  const [temaOscuro, setTema] = useState(false);
+  const [user, setUser] = useState("");
+
+  const handleUser = (nombre) => {
+    setUser(nombre);
+    console.log(user);
+  };
+
+  const handleTema = () => {
+    setTema(!temaOscuro);
+  };
+
+  return (
+    <div className={`h-screen ${temaOscuro ? "dark" : ""}`}>
+      <div
+        style={{
+          backgroundImage: `url(${fondo})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          // backgroundAttachment: "fixed",
+        }}
+        className="bg-fondo dark:bg-dark-fondo h-full flex flex-col"
+      >
+        <Header user={user} handleUser={handleUser} handleTema={handleTema} />
+        <Main />
+        <Footer handleTema={handleTema} temaOscuro={temaOscuro}/>
+      </div>
+    </div>
+  );
+}
+
+export default App;
