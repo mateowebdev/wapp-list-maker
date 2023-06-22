@@ -22,21 +22,21 @@ function App() {
   };
 
   return (
-    <div className={`h-screen ${temaOscuro ? "dark" : ""}`}>
-      <div
-        style={{
-          backgroundImage: `url(${fondo})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          // backgroundAttachment: "fixed",
-        }}
-        className="bg-fondo dark:bg-dark-fondo h-full flex flex-col"
-      >
-        <Header user={user} handleUser={handleUser} handleTema={handleTema} />
-        <Main />
-        <Footer handleTema={handleTema} temaOscuro={temaOscuro}/>
-      </div>
+    <div
+      className={`min-h-screen bg-fondo dark:bg-dark-fondo flex flex-col ${
+        temaOscuro ? "dark" : ""
+      }`}
+      style={{
+        minHeight: "110svh",
+        backgroundImage: `url(${fondo})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Header user={user} handleUser={handleUser} handleTema={handleTema} />
+      <Main />
+      <Footer handleTema={handleTema} temaOscuro={temaOscuro} />
     </div>
   );
 }

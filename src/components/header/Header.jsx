@@ -16,7 +16,7 @@ export default function Header({ user, handleUser, handleTema }) {
   };
 
   return (
-    <div className="bg-wapp-verde dark:bg-dark-fondo-claro p-4 flex justify-between items-center">
+    <div className="bg-wapp-verde dark:bg-dark-fondo-claro p-4 flex justify-between items-center sticky top-0">
       <h1 onClick={handleTema} className="text-white text-xl font-bold">
         ListaMaker
       </h1>
