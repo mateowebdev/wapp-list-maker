@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen bg-fondo dark:bg-dark-fondo flex flex-col ${
-        temaOscuro ? "dark" : ""
+      className={`min-h-screen bg-fondo flex flex-col ${
+        temaOscuro ? "dark bg-dark-fondo" : ""
       }`}
       style={{
         minHeight: "110svh",
