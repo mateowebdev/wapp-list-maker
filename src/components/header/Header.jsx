@@ -18,7 +18,7 @@ export default function Header({ user, handleUser, handleTema, temaOscuro }) {
   };
 
   return (
-    <div className="bg-wapp-verde dark:bg-dark-fondo-claro p-4  sticky top-0">
+    <div className="bg-wapp-verde dark:bg-dark-fondo-claro p-4">
       <h1 className="text-white text-center text-xl font-bold">
         ListaMaker
       </h1>

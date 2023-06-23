@@ -7,6 +7,7 @@ import Main from "./components/main/Main";
 import Footer from "./components/footer/Footer";
 
 import fondo from "./assets/wapp-bg.png";
+import Modal from "./components/modal/Modal";
 
 function App() {
   const [temaOscuro, setTema] = useState(false);
@@ -22,6 +23,7 @@ function App() {
     primero: false,
     listaBajas: false,
   });
+  const [modal, setModal] = useState(false);
 
   const handleUser = (nombre) => {
     setUser(nombre);
@@ -31,11 +33,16 @@ function App() {
   const handleTema = () => {
     setTema(!temaOscuro);
   };
+  const handleModal = () => {
+    setModal(!modal);
+  };
 
   const handleEvento = (evento) => {
     setEvento((prev) => ({ ...prev, ...evento }));
+    setModal(!modal)
     console.log(evento);
   };
+
 
   return (
     <div
@@ -57,6 +64,7 @@ function App() {
         temaOscuro={temaOscuro}
       />
       <Main evento={evento} handleEvento={handleEvento} />
+      {modal && <Modal evento={evento} handleModal={handleModal}/>}
     </div>
   );
 }

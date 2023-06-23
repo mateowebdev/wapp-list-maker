@@ -74,8 +74,9 @@ export default function Main({ evento, handleEvento }) {
     if (campo === "dia") {
       valor = new Date(valor.replaceAll("-", "/")).toLocaleDateString();
     }
-    if (!link && valor === "maps") {
-      valor = "";
+    if (campo === "maps") {
+      console.log("mapasss");
+      valor = valor.split(" ").find(item => item.includes('https'));
     }
 
     setDetalleEvento({
@@ -98,18 +99,16 @@ export default function Main({ evento, handleEvento }) {
     <div className=" text-gris dark:text-dark-gris  p-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
-          <label htmlFor="nombre">Evento</label>
+          <label htmlFor="nombre">Evento *</label>
           <input
             name="nombre"
             value={nombre}
             onChange={(e) => handleInput(e)}
             id="nombre"
             type="text"
-            minLength="3"
-            maxLength="30"
             required
             placeholder="Argentina vs Brasil"
-            className="p-2 rounded dark:bg-dark-fondo-claro"
+            className="p-2 rounded bg-white dark:bg-dark-fondo-claro"
           />
         </div>
         <div className="flex flex-col items-end">
@@ -122,27 +121,25 @@ export default function Main({ evento, handleEvento }) {
             onChange={(e) => handleInput(e)}
             id="lugar"
             type="text"
-            minLength="3"
-            maxLength="30"
             placeholder="Estadio Único LP"
-            className="w-full p-2 rounded dark:bg-dark-fondo-claro"
+            className="w-full p-2 rounded bg-white dark:bg-dark-fondo-claro"
           />
           {link && (
-            <div className="w-full mt-1 flex items-center gap-2">
+            <div className="w-full mt-1 ">
+            <div className="flex items-center gap-2">
               <FiMap onClick={handleOpenMaps} className="text-xl" />
               <input
                 name="maps"
                 value={maps}
                 onChange={(e) => handleInput(e)}
                 id="maps"
-                type="url"
-                pattern="https://.*"
-                minLength="10"
-                maxLength="40"
+                type="text"
                 placeholder="https://goo.gl/maps/ArSjPtpW4dEr5DrD6"
-                className="flex-grow p-2 rounded dark:bg-dark-fondo-claro"
+                className="flex-grow p-2 rounded bg-white dark:bg-dark-fondo-claro"
               />
             </div>
+              <p><small>Copia el link de Google Maps y pegalo.</small></p>
+</div>
           )}
           <button
             onClick={handleAddLink}
@@ -160,7 +157,7 @@ export default function Main({ evento, handleEvento }) {
               onChange={(e) => handleInput(e)}
               id="dia"
               type="date"
-              className="p-2 rounded dark:bg-dark-fondo-claro"
+              className="p-2 rounded bg-white dark:bg-dark-fondo-claro"
             />
           </div>
           <div className="flex-grow flex flex-col">
@@ -171,7 +168,7 @@ export default function Main({ evento, handleEvento }) {
               onChange={(e) => handleInput(e)}
               id="hora"
               type="time"
-              className="p-2 rounded dark:bg-dark-fondo-claro"
+              className="p-2 rounded bg-white dark:bg-dark-fondo-claro"
             />
           </div>
         </div>
@@ -184,7 +181,7 @@ export default function Main({ evento, handleEvento }) {
             id="descripcion"
             type="text"
             placeholder="Conseguir los paasajes con tiempo."
-            className="p-2 rounded dark:bg-dark-fondo-claro"
+            className="p-2 rounded bg-white dark:bg-dark-fondo-claro"
           />
           <small>Opcional</small>
         </div>
@@ -199,7 +196,7 @@ export default function Main({ evento, handleEvento }) {
             min="0"
             step="1"
             max="20"
-            className="w-32 p-2 rounded dark:bg-dark-fondo-claro"
+            className="w-32 p-2 rounded bg-white dark:bg-dark-fondo-claro"
           />
         </div>
         <div className="flex items-center gap-2">
