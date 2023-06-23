@@ -10,7 +10,7 @@ import fondo from "./assets/wapp-bg.png";
 import Modal from "./components/modal/Modal";
 
 function App() {
-  const [temaOscuro, setTema] = useState(false);
+  const [temaOscuro, setTema] = useState(JSON.parse(localStorage.getItem("theme")) || false);
   const [user, setUser] = useState(localStorage.getItem("user") || "");
   const [evento, setEvento] = useState({
     nombre: "",
@@ -31,6 +31,7 @@ function App() {
   };
 
   const handleTema = () => {
+    localStorage.setItem("theme",!temaOscuro);
     setTema(!temaOscuro);
   };
   const handleModal = () => {
@@ -53,7 +54,7 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col ${
+      className={`h-full flex flex-col ${
         temaOscuro ? "dark bg-dark-fondo" : "bg-fondo"
       }`}
       style={{
