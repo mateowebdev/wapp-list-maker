@@ -28,9 +28,9 @@ export default function Modal({ user, evento, handleModal }) {
         {dia && (
           <p>
             <span>
-              📆 {new Date(dia.replaceAll("-", "/")).toLocaleDateString()}
+              📆 {new Date(dia.replaceAll("-", "/")).toLocaleDateString()}{" "}
             </span>
-            {hora && <span className="ml-1">|{hora} hs</span>}
+            {hora && <span>|{" "}{hora}{" "}hs</span>}
           </p>
         )}
         {descripcion && <p className="italic">📝 {descripcion}</p>}
