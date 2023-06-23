@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div
-      className={`h-full flex flex-col ${
+      className={`h-screen flex flex-col ${
         temaOscuro ? "dark bg-dark-fondo" : "bg-fondo"
       }`}
       style={{
