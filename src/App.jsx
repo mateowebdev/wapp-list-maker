@@ -58,7 +58,6 @@ function App() {
         temaOscuro ? "dark bg-dark-fondo" : "bg-fondo"
       }`}
       style={{
-        minHeight: "100svh",
         backgroundImage: `url(${fondo})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
