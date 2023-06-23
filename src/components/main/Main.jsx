@@ -84,13 +84,14 @@ export default function Main({ user, evento, handleEvento }) {
   };
 
   const addListado = () => {
+    if (detalleEvento.listado === 25) return;
     setDetalleEvento({
       ...detalleEvento,
       listado: detalleEvento.listado + 1,
     });
   };
   const subtractListado = () => {
-    if (detalleEvento.listado === 0) return;
+    if (detalleEvento.listado === 1) return;
     setDetalleEvento({
       ...detalleEvento,
       listado: detalleEvento.listado - 1,
@@ -232,7 +233,7 @@ export default function Main({ user, evento, handleEvento }) {
               onChange={(e) => handleInput(e)}
               id="listado"
               type="number"
-              min="0"
+              min="1"
               step="1"
               max="25"
               className="w-32 p-2 rounded bg-white dark:bg-dark-fondo-claro"
