@@ -113,7 +113,7 @@ export default function Main({user, evento, handleEvento }) {
   };
 
   return (
-    <div className=" text-gris dark:text-dark-gris  p-8">
+    <div className="flex-grow text-gris dark:text-dark-gris  p-8">
       <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
           <label htmlFor="nombre">Evento *</label>
