@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { FiMap } from "react-icons/fi";
 
-export default function Main({ evento, handleEvento }) {
+export default function Main({user, evento, handleEvento }) {
+  const formRef = useRef(null)
   const [link, setLink] = useState(false);
 
   const [detalleEvento, setDetalleEvento] = useState({
@@ -62,6 +63,25 @@ export default function Main({ evento, handleEvento }) {
     handleEvento(detalleEvento);
   };
 
+  const handleReset = ()=>{
+    console.log(formRef);
+    const limpio = {
+      nombre: "",
+      lugar: "",
+      maps: "",
+      dia: "",
+      hora: "",
+      descripcion: "",
+      listado: 0,
+      primero: false,
+      listaBajas: false,
+    }
+    setDetalleEvento({
+      ...detalleEvento,
+      ...limpio,
+    });
+  }
+
   const handleInput = (e) => {
     console.log("CHANGE");
     const campo = e.target.name;
@@ -73,7 +93,6 @@ export default function Main({ evento, handleEvento }) {
     }
     
     if (campo === "maps") {
-      console.log("mapasss");
       valor = valor.split(" ").find(item => item.includes('https'));
     }
 
@@ -85,7 +104,7 @@ export default function Main({ evento, handleEvento }) {
 
   const handleCheck = (e) => {
     const campo = e.target.name;
-    const valor = e.target.checked;
+    let valor = e.target.checked;
 
     setDetalleEvento({
       ...detalleEvento,
@@ -95,7 +114,7 @@ export default function Main({ evento, handleEvento }) {
 
   return (
     <div className=" text-gris dark:text-dark-gris  p-8">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
           <label htmlFor="nombre">Evento *</label>
           <input
@@ -219,12 +238,12 @@ export default function Main({ evento, handleEvento }) {
         </div>
         <button
           type="submit"
-          className="uppercase rounded-full bg-wapp-verde font-medium p-2"
+          className="uppercase rounded-full bg-wapp-verde font-medium p-2 active:bg-dark-wapp-verde active:"
         >
           Ver mensaje
         </button>
         <div className="flex">
-          <button className="text-xs text-red-400">Resetear campos</button>
+          <button onClick={handleReset} type="reset" className="text-xs text-red-400">Resetear campos</button>
         </div>
       </form>
     </div>

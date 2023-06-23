@@ -11,7 +11,7 @@ import Modal from "./components/modal/Modal";
 
 function App() {
   const [temaOscuro, setTema] = useState(false);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(localStorage.getItem("user") || "");
   const [evento, setEvento] = useState({
     nombre: "",
     lugar: "",
@@ -34,11 +34,18 @@ function App() {
     setTema(!temaOscuro);
   };
   const handleModal = () => {
+   
     setModal(!modal);
   };
 
   const handleEvento = (evento) => {
     setEvento((prev) => ({ ...prev, ...evento }));
+
+    if (evento.primero && user==="") {
+      alert("Agrega tu nombre en la barra superior, haciendo click en el icono de usuario.")
+     return 
+    }
+
     setModal(!modal)
     console.log(evento);
   };
@@ -63,8 +70,8 @@ function App() {
         handleTema={handleTema}
         temaOscuro={temaOscuro}
       />
-      <Main evento={evento} handleEvento={handleEvento} />
-      {modal && <Modal evento={evento} handleModal={handleModal}/>}
+      <Main user={user} evento={evento} handleEvento={handleEvento} />
+      {modal && <Modal user={user} evento={evento} handleModal={handleModal}/>}
     </div>
   );
 }
