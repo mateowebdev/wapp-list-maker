@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 
 import { FiMap } from "react-icons/fi";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
-export default function Main({user, evento, handleEvento }) {
-  const formRef = useRef(null)
+export default function Main({ user, evento, handleEvento }) {
+  const formRef = useRef(null);
   const [link, setLink] = useState(false);
 
   const [detalleEvento, setDetalleEvento] = useState({
@@ -63,7 +64,7 @@ export default function Main({user, evento, handleEvento }) {
     handleEvento(detalleEvento);
   };
 
-  const handleReset = ()=>{
+  const handleReset = () => {
     console.log(formRef);
     const limpio = {
       nombre: "",
@@ -75,12 +76,26 @@ export default function Main({user, evento, handleEvento }) {
       listado: 0,
       primero: false,
       listaBajas: false,
-    }
+    };
     setDetalleEvento({
       ...detalleEvento,
       ...limpio,
     });
-  }
+  };
+
+  const addListado = () => {
+    setDetalleEvento({
+      ...detalleEvento,
+      listado: detalleEvento.listado + 1,
+    });
+  };
+  const subtractListado = () => {
+    if (detalleEvento.listado === 0) return;
+    setDetalleEvento({
+      ...detalleEvento,
+      listado: detalleEvento.listado - 1,
+    });
+  };
 
   const handleInput = (e) => {
     console.log("CHANGE");
@@ -91,9 +106,9 @@ export default function Main({user, evento, handleEvento }) {
     if (campo === "listado") {
       valor = parseInt(valor);
     }
-    
+
     if (campo === "maps") {
-      valor = valor.split(" ").find(item => item.includes('https'));
+      valor = valor.split(" ").find((item) => item.includes("https"));
     }
 
     setDetalleEvento({
@@ -114,7 +129,12 @@ export default function Main({user, evento, handleEvento }) {
 
   return (
     <div className="flex-grow text-gris dark:text-dark-gris  p-8">
-      <form ref={formRef} autoComplete="off" onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form
+        ref={formRef}
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4"
+      >
         <div className="flex flex-col">
           <label htmlFor="nombre">Evento *</label>
           <input
@@ -143,20 +163,22 @@ export default function Main({user, evento, handleEvento }) {
           />
           {link && (
             <div className="w-full mt-1 ">
-            <div className="flex items-center gap-2">
-              <FiMap onClick={handleOpenMaps} className="text-xl" />
-              <input
-                name="maps"
-                value={maps}
-                onChange={(e) => handleInput(e)}
-                id="maps"
-                type="text"
-                placeholder="https://goo.gl/maps/ArSjPtpW4dEr5DrD6"
-                className="flex-grow p-2 rounded bg-white dark:bg-dark-fondo-claro"
-              />
+              <div className="flex items-center gap-2">
+                <FiMap onClick={handleOpenMaps} className="text-xl" />
+                <input
+                  name="maps"
+                  value={maps}
+                  onChange={(e) => handleInput(e)}
+                  id="maps"
+                  type="text"
+                  placeholder="https://goo.gl/maps/ArSjPtpW4dEr5DrD6"
+                  className="flex-grow p-2 rounded bg-white dark:bg-dark-fondo-claro"
+                />
+              </div>
+              <p>
+                <small>Copia el link de Google Maps y pegalo.</small>
+              </p>
             </div>
-              <p><small>Copia el link de Google Maps y pegalo.</small></p>
-</div>
           )}
           <button
             onClick={handleAddLink}
@@ -200,22 +222,34 @@ export default function Main({user, evento, handleEvento }) {
             placeholder="Conseguir los paasajes con tiempo."
             className="p-2 rounded bg-white dark:bg-dark-fondo-claro"
           />
-          <small>Opcional</small>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="listado">Listar numeros</label>
-          <input
-            name="listado"
-            value={listado}
-            onChange={(e) => handleInput(e)}
-            id="listado"
-            type="number"
-            min="0"
-            step="1"
-            max="20"
-            className="w-32 p-2 rounded bg-white dark:bg-dark-fondo-claro"
-          />
+        <div className="flex items-end">
+          <div className="flex flex-col">
+            <label htmlFor="listado">Listar numeros</label>
+            <input
+              name="listado"
+              value={listado}
+              onChange={(e) => handleInput(e)}
+              id="listado"
+              type="number"
+              min="0"
+              step="1"
+              max="25"
+              className="w-32 p-2 rounded bg-white dark:bg-dark-fondo-claro"
+            />
+          </div>
+          <div className="flex gap-4 px-4 p-2">
+            <AiOutlinePlusCircle
+              onClick={addListado}
+              className="text-2xl text-wapp-verde"
+            />
+            <AiOutlineMinusCircle
+              onClick={subtractListado}
+              className="text-2xl text-gray-500"
+            />
+          </div>
         </div>
+
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -238,12 +272,18 @@ export default function Main({user, evento, handleEvento }) {
         </div>
         <button
           type="submit"
-          className="uppercase rounded-full bg-wapp-verde font-medium p-2 active:bg-dark-wapp-verde active:"
+          className="uppercase text-white rounded-full bg-wapp-verde font-medium p-2 active:bg-dark-wapp-verde active:"
         >
           Ver mensaje
         </button>
         <div className="flex">
-          <button onClick={handleReset} type="reset" className="text-xs text-red-400">Resetear campos</button>
+          <button
+            onClick={handleReset}
+            type="reset"
+            className="text-xs text-red-400"
+          >
+            Resetear campos
+          </button>
         </div>
       </form>
     </div>

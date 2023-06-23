@@ -16,7 +16,7 @@ export default function Modal({ user, evento, handleModal }) {
 
   return (
     <div
-      className="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm w-full h-full p-5 absolute flex flex-col justify-center items-center gap-4"
+      className="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm w-full h-screen p-5 absolute flex flex-col justify-center items-center gap-4"
       style={{
         minHeight: "100svh",
       }}
@@ -27,8 +27,10 @@ export default function Modal({ user, evento, handleModal }) {
         {maps && <p className="text-blue-400">{maps}</p>}
         {dia && (
           <p>
-            📆 {new Date(dia.replaceAll("-", "/")).toLocaleDateString()} |{" "}
-            {hora} hs
+            <span>
+              📆 {new Date(dia.replaceAll("-", "/")).toLocaleDateString()}
+            </span>
+            {hora && <span className="ml-1">|{hora} hs</span>}
           </p>
         )}
         {descripcion && <p className="italic">📝 {descripcion}</p>}
@@ -37,22 +39,26 @@ export default function Modal({ user, evento, handleModal }) {
           ? lista.map((item, index) => {
               if (index === 0) {
                 return (
-                  <p>
+                  <p key={item + index}>
                     {item}. {user}
                   </p>
                 );
               } else {
-                return <p>{item}. </p>;
+                return <p key={item + index}>{item}. </p>;
               }
             })
           : ""}
-        {!primero && lista.length > 0 && lista.map((item) => <p>{item}. </p>)}
-        {listaBajas && <>
+        {!primero &&
+          lista.length > 0 &&
+          lista.map((item, index) => <p key={item + index}>{item}. </p>)}
+        {listaBajas && (
+          <>
             <p>------------------------------</p>
             <p>👎 Bajas: </p>
-        </>}
+          </>
+        )}
       </div>
-      <button className="uppercase rounded-full bg-wapp-verde font-medium p-2">
+      <button className="w-full uppercase rounded-full bg-wapp-verde font-medium p-2">
         Compartir mensaje
       </button>
       <MdClose onClick={handleModal} className="text-3xl text-white" />

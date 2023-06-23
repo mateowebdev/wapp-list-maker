@@ -19,7 +19,7 @@ function App() {
     dia: "",
     hora: "",
     descripcion: "",
-    listado: 0,
+    listado: 1,
     primero: false,
     listaBajas: false,
   });
