@@ -1,69 +1,187 @@
 import { useState } from "react";
 
-export default function Main() {
+import { FiMap } from "react-icons/fi";
+
+export default function Main({ evento, handleEvento }) {
   const [link, setLink] = useState(false);
+
+  const [detalleEvento, setDetalleEvento] = useState({
+    nombre: evento.nombre,
+    lugar: evento.lugar,
+    maps: evento.maps,
+    dia: evento.dia,
+    hora: evento.hora,
+    descripcion: evento.descripcion,
+    listado: evento.listado,
+    primero: evento.primero,
+    listaBajas: evento.listaBajas,
+  });
+
+  const {
+    nombre,
+    lugar,
+    maps,
+    dia,
+    hora,
+    descripcion,
+    listado,
+    primero,
+    listaBajas,
+  } = detalleEvento;
+
+  /* {
+      nombre: "",
+      lugar: "",
+      maps: "",
+      dia: "",
+      hora: "",
+      descripcion: "",
+      listado: 0,
+      primero: false,
+      listaBajas: false,
+    } */
 
   const handleAddLink = (e) => {
     e.preventDefault();
-    setLink(!link)
+    if (link) {
+      setDetalleEvento({
+        ...detalleEvento,
+        maps: "",
+      });
+    }
+    setLink(!link);
   };
+
+  const handleOpenMaps = () => {
+    window.open("http://www.google.com/maps/place/", "_blank", "location=yes");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    handleEvento(detalleEvento);
+  };
+
+  const handleInput = (e) => {
+    console.log("CHANGE");
+    const campo = e.target.name;
+    let valor = e.target.value;
+
+    /* NORMALIZO DATOS */
+    if (campo === "listado") {
+      valor = parseInt(valor);
+    }
+    if (campo === "dia") {
+      valor = new Date(valor.replaceAll("-", "/")).toLocaleDateString();
+    }
+    if (!link && valor === "maps") {
+      valor = "";
+    }
+
+    setDetalleEvento({
+      ...detalleEvento,
+      [campo]: valor,
+    });
+  };
+
+  const handleCheck = (e) => {
+    const campo = e.target.name;
+    const valor = e.target.checked;
+
+    setDetalleEvento({
+      ...detalleEvento,
+      [campo]: valor,
+    });
   };
 
   return (
-    <div className="text-gris dark:text-dark-gris flex-grow p-8">
+    <div className=" text-gris dark:text-dark-gris  p-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
-          <label htmlFor="">Evento</label>
+          <label htmlFor="nombre">Evento</label>
           <input
+            name="nombre"
+            value={nombre}
+            onChange={(e) => handleInput(e)}
+            id="nombre"
             type="text"
+            minLength="3"
+            maxLength="30"
+            required
             placeholder="Argentina vs Brasil"
             className="p-2 rounded dark:bg-dark-fondo-claro"
           />
         </div>
         <div className="flex flex-col items-end">
-          <label htmlFor="" className="w-full">
+          <label htmlFor="lugar" className="w-full">
             Lugar
           </label>
           <input
+            name="lugar"
+            value={lugar}
+            onChange={(e) => handleInput(e)}
+            id="lugar"
             type="text"
+            minLength="3"
+            maxLength="30"
             placeholder="Estadio Único LP"
             className="w-full p-2 rounded dark:bg-dark-fondo-claro"
           />
           {link && (
-            <input
-              type="text"
-              placeholder="https;//maps.com"
-              className="mt-1 w-full p-2 rounded dark:bg-dark-fondo-claro"
-            />
+            <div className="w-full mt-1 flex items-center gap-2">
+              <FiMap onClick={handleOpenMaps} className="text-xl" />
+              <input
+                name="maps"
+                value={maps}
+                onChange={(e) => handleInput(e)}
+                id="maps"
+                type="url"
+                pattern="https://.*"
+                minLength="10"
+                maxLength="40"
+                placeholder="https://goo.gl/maps/ArSjPtpW4dEr5DrD6"
+                className="flex-grow p-2 rounded dark:bg-dark-fondo-claro"
+              />
+            </div>
           )}
           <button
             onClick={handleAddLink}
             className="text-xs font-medium text-dark-wapp-verde dark:text-resalta"
           >
-            {!link ?"Agregar link" : "Quitar link"}
+            {!link ? "Agregar link" : "Quitar link"}
           </button>
         </div>
         <div className="flex justify-between gap-4">
           <div className="flex-grow flex flex-col">
-            <label htmlFor="">Dia</label>
+            <label htmlFor="dia">Dia</label>
             <input
+              name="dia"
+              value={dia}
+              onChange={(e) => handleInput(e)}
+              id="dia"
               type="date"
               className="p-2 rounded dark:bg-dark-fondo-claro"
             />
           </div>
           <div className="flex-grow flex flex-col">
-            <label htmlFor="">Horario</label>
+            <label htmlFor="hora">Horario</label>
             <input
+              name="hora"
+              value={hora}
+              onChange={(e) => handleInput(e)}
+              id="hora"
               type="time"
               className="p-2 rounded dark:bg-dark-fondo-claro"
             />
           </div>
         </div>
         <div className="flex flex-col">
-          <label htmlFor="">Descripción</label>
+          <label htmlFor="descripcion">Descripción</label>
           <input
+            name="descripcion"
+            value={descripcion}
+            onChange={(e) => handleInput(e)}
+            id="descripcion"
             type="text"
             placeholder="Conseguir los paasajes con tiempo."
             className="p-2 rounded dark:bg-dark-fondo-claro"
@@ -71,23 +189,45 @@ export default function Main() {
           <small>Opcional</small>
         </div>
         <div className="flex flex-col">
-          <label htmlFor="">Listado de números</label>
+          <label htmlFor="listado">Listar numeros</label>
           <input
+            name="listado"
+            value={listado}
+            onChange={(e) => handleInput(e)}
+            id="listado"
             type="number"
-            name=""
-            id=""
+            min="0"
+            step="1"
+            max="20"
             className="w-32 p-2 rounded dark:bg-dark-fondo-claro"
           />
         </div>
         <div className="flex items-center gap-2">
-          <input type="checkbox" />
-          <label htmlFor="">Agregarme primero en la lista</label>
+          <input
+            type="checkbox"
+            name="primero"
+            id="primero"
+            value={primero}
+            onChange={(e) => handleCheck(e)}
+          />
+          <label htmlFor="primero">Agregarme primero en la lista</label>
         </div>
         <div className="flex items-center gap-2">
-          <input type="checkbox" />
-          <label htmlFor="">Agregar listado de bajas</label>
+          <input
+            type="checkbox"
+            name="listaBajas"
+            id="listaBajas"
+            value={listaBajas}
+            onChange={(e) => handleCheck(e)}
+          />
+          <label htmlFor="listaBajas">Agregar listado de bajas</label>
         </div>
-        <button type="submit" className="uppercase rounded-full bg-wapp-verde font-medium p-2">Ver mensaje</button>
+        <button
+          type="submit"
+          className="uppercase rounded-full bg-wapp-verde font-medium p-2"
+        >
+          Ver mensaje
+        </button>
         <div className="flex">
           <button className="text-xs text-red-400">Resetear campos</button>
         </div>
