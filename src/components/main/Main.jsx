@@ -71,9 +71,7 @@ export default function Main({ evento, handleEvento }) {
     if (campo === "listado") {
       valor = parseInt(valor);
     }
-    if (campo === "dia") {
-      valor = new Date(valor.replaceAll("-", "/")).toLocaleDateString();
-    }
+    
     if (campo === "maps") {
       console.log("mapasss");
       valor = valor.split(" ").find(item => item.includes('https'));
