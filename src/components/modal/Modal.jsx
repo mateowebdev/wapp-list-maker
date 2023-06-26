@@ -17,7 +17,7 @@ export default function Modal({ user, evento, handleModal }) {
 
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
-  const { crearMsgWap } = useMensageWap(nombre); // mandar parametros
+  const { crearMsgWap } = useMensageWap(nombre,lugar); // mandar parametros
 
   const handleShare = async () => {
     const mensaje = crearMsgWap();
@@ -27,6 +27,7 @@ export default function Modal({ user, evento, handleModal }) {
     if (navigator.share) {
       await navigator
         .share({
+          title: "Nuevo evento",
           text: mensaje,
         })
         .then(() => console.log("Successful share"))
