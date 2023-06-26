@@ -27,9 +27,7 @@ export default function Modal({ user, evento, handleModal }) {
     if (navigator.share) {
       await navigator
         .share({
-          title: "title",
           text: mensaje,
-          url: "url to share",
         })
         .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error in sharing", error));
