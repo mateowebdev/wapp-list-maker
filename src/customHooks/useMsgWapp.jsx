@@ -17,6 +17,8 @@ export default function useMensageWap(
   const NOMBRE_EVENTO = `
   *${nombre}*
   📍 ${lugar}
+  ${maps ? maps : ""}
+  📅 ${dia}${hora ? ' | '+hora+" hs" : ""}
   `;
   const LUGAR_EVENTO = `%0D%0A📍 ${lugar}%0D%0A`;
   const LINK_EVENTO = `%0D%0A${maps}%0D%0A`;
