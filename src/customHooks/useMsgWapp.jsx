@@ -10,9 +10,6 @@ export default function useMensageWap(
   listaBajas,
   user
 ) {
-  const pesos = Intl.NumberFormat("es-AR");
-  const cantidades = pizzasEncargadas.map((pizza) => pizza.cantidad);
-  const pizzasTotales = cantidades.reduce((a, b) => a + b, 0);
 
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
@@ -33,7 +30,7 @@ export default function useMensageWap(
     )
     .join("")}`;
   const LINEAS = `-----------------------------`;
-  const BAJAS_EVENTO = `%0D%0ALISTADO PIZZAS (${pizzasTotales})%0D%0A`;
+  const BAJAS_EVENTO = `%0D%0ALISTADO PIZZAS ()%0D%0A`;
 
 
   const FOOTER = `%0D%0A%0D%0A_Creado con: https://wapp.com_`;
