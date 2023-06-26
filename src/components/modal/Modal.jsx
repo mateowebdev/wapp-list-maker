@@ -1,4 +1,7 @@
+import useMensageWap from "../../customHooks/useMsgWapp";
+
 import { MdClose } from "react-icons/md";
+
 export default function Modal({ user, evento, handleModal }) {
   const {
     nombre,
@@ -14,6 +17,27 @@ export default function Modal({ user, evento, handleModal }) {
 
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
+  const { crearMsgWap } = useMensageWap(nombre); // mandar parametros
+
+  const handleShare = async () => {
+    const mensaje = crearMsgWap();
+    //const url = `https://wa.me/5492995965043?text=${mensaje}`;
+    //window.open(url, "_blank");
+
+    if (navigator.share) {
+      await navigator
+        .share({
+          title: "title",
+          text: mensaje,
+          url: "url to share",
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Error in sharing", error));
+    } else {
+      console.log(`system does not support sharing files.`);
+    }
+  };
+
   return (
     <div
       className="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm w-full h-screen p-5 absolute flex flex-col justify-center items-center gap-4"
@@ -23,14 +47,14 @@ export default function Modal({ user, evento, handleModal }) {
     >
       <div className="bg-fondo-claro dark:bg-dark-fondo-claro dark:text-dark-gris rounded w-full p-4">
         <p className="font-bold uppercase">{nombre}</p>
-        {lugar && <p>🚩 {lugar}</p>}
+        {lugar && <p>📍 {lugar}</p>}
         {maps && <p className="text-blue-400">{maps}</p>}
         {dia && (
           <p>
             <span>
               📆 {new Date(dia.replaceAll("-", "/")).toLocaleDateString()}{" "}
             </span>
-            {hora && <span>|{" "}{hora}{" "}hs</span>}
+            {hora && <span>| {hora} hs</span>}
           </p>
         )}
         {descripcion && <p className="italic">📝 {descripcion}</p>}
@@ -58,7 +82,10 @@ export default function Modal({ user, evento, handleModal }) {
           </>
         )}
       </div>
-      <button className="w-full uppercase rounded-full bg-wapp-verde font-medium p-2">
+      <button
+        onClick={handleShare}
+        className="w-full uppercase rounded-full bg-wapp-verde font-medium p-2"
+      >
         Compartir mensaje
       </button>
       <MdClose onClick={handleModal} className="text-3xl text-white" />
