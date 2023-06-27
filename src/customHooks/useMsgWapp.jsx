@@ -13,27 +13,29 @@ export default function useMensageWap(
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
   const NOMBRE_EVENTO = `*${nombre.toUpperCase().trim()}*
-  `;
+`;
   const LUGAR_EVENTO = `${lugar.length > 3 ? "📍 "+lugar.trim() : "📍 Lugar a definir."}
-  `;
+`;
   const LINK_EVENTO = `${maps ? maps.trim() : ""}
-  `;
+`;
 
   const DIA_EVENTO = `${dia ? "📅 "+dia.trim() : "📅 Fecha a definir."}`;
   const HORARIO_EVENTO = `${hora ? "⏰ "+hora.trim()+ " hs" : ""}`;
   const FECHA_EVENTO = `${DIA_EVENTO} ${HORARIO_EVENTO}
-  `;
+`;
 
-  const DESCRIPCION_EVENTO = `${descripcion ? "📝 _"+descripcion.trim()+"_" : ""}`;
+  const DESCRIPCION_EVENTO = `${descripcion ? "📝 _"+descripcion.trim()+"_" : ""}
+  
+`;
 
   const LISTADO_EVENTO = `${lista
     .map((item, index) => {
       if (index === 0 && user) {
         return `${item}. ${user}
-        `;
+`;
       } else {
         return `${item}. 
-        `;
+`;
       }
     })
     .join("")}`;
