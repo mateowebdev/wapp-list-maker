@@ -12,26 +12,30 @@ export default function useMensageWap(
 ) {
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
-  const NOMBRE_EVENTO = `*${nombre}*`;
+  const NOMBRE_EVENTO = `*${nombre.toUpperCase()}*`;
   const LUGAR_EVENTO = `📍 ${lugar.length > 3 ? lugar : "Lugar a definir."}`;
   const LINK_EVENTO = `${maps ? maps : ""}`;
   const DIA_EVENTO = `📅 ${dia ? dia : "Fecha a definir."}`;
-  const HORARIO_EVENTO = `| ${hora ? hora + " hs" : ""})`;
-  const FECHA_EVENTO = `${DIA_EVENTO} ${HORARIO_EVENTO})`;
+  const HORARIO_EVENTO = `| ${hora ? hora + " hs" : ""}`;
+  const FECHA_EVENTO = `${DIA_EVENTO} ${HORARIO_EVENTO}`;
   const DESCRIPCION_EVENTO = `📝 ${descripcion}`;
   const LISTADO_EVENTO = `${lista
     .map((item, index) => {
       if (index === 0 && user) {
-        return `${item}. ${user}`;
+        return `${item}. ${user}
+        `;
       } else {
-        return `${item}. `;
+        return `${item}. 
+        `;
       }
     })
     .join("")}`;
   const BAJAS_EVENTO = `-----------------------------
   👎 Bajas:`;
 
-  const FOOTER = `_Creado con: https://wapp.com_`;
+  const FOOTER = `
+  
+  _Creado con: https://wapp.com_`;
 
   const mensaje = `${NOMBRE_EVENTO}
   ${LUGAR_EVENTO}
