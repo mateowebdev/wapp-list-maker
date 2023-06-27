@@ -17,6 +17,8 @@ export default function Modal({ user, evento, handleModal }) {
 
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
+  const url = window.location.href;
+
   const { crearMsgWap } = useMensageWap(
     nombre,
     lugar,
@@ -27,7 +29,8 @@ export default function Modal({ user, evento, handleModal }) {
     listado,
     primero,
     listaBajas,
-    user
+    user,
+    url
   ); // mandar parametros
 
   const handleShare = async () => {

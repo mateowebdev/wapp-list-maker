@@ -8,7 +8,8 @@ export default function useMensageWap(
   listado,
   primero,
   listaBajas,
-  user
+  user,
+  url
 ) {
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
@@ -41,12 +42,12 @@ export default function useMensageWap(
     .join("")}`;
 
   const BAJAS_EVENTO = `-----------------------------
-  👎 Bajas:`;
+👎 Bajas:`;
 
   const FOOTER = `
   
 
-  _Creado con: https://wapp.com_`;
+_Creado con: ${url}`;
 
   const mensaje = NOMBRE_EVENTO+LUGAR_EVENTO+LINK_EVENTO+FECHA_EVENTO+DESCRIPCION_EVENTO+LISTADO_EVENTO+BAJAS_EVENTO+FOOTER;
 
