@@ -15,7 +15,7 @@ export default function useMensageWap(
 
   const NOMBRE_EVENTO = `*${nombre.toUpperCase().trim()}*
 `;
-  const LUGAR_EVENTO = `${lugar.length > 3 ? "📍 "+lugar.trim() : "📍 Lugar a definir."}
+  const LUGAR_EVENTO = `${lugar.length > 3 ? "📌 "+lugar.trim() : "📌 Lugar a definir."}
 `;
   const LINK_EVENTO = `${maps ? maps.trim() : ""}
 `;
@@ -31,7 +31,7 @@ export default function useMensageWap(
 
   const LISTADO_EVENTO = `${lista
     .map((item, index) => {
-      if (index === 0 && user) {
+      if (index === 0 && primero) {
         return `${item}. ${user}
 `;
       } else {
@@ -47,9 +47,9 @@ export default function useMensageWap(
   const FOOTER = `
   
 
-_Creado con: ${url}`;
+_Creado con: ${url}_`;
 
-  const mensaje = NOMBRE_EVENTO+LUGAR_EVENTO+LINK_EVENTO+FECHA_EVENTO+DESCRIPCION_EVENTO+LISTADO_EVENTO+BAJAS_EVENTO+FOOTER;
+  const mensaje = NOMBRE_EVENTO+LUGAR_EVENTO+LINK_EVENTO+FECHA_EVENTO+DESCRIPCION_EVENTO+LISTADO_EVENTO+`${listaBajas ? BAJAS_EVENTO : ''}`+FOOTER;
 
   const crearMsgWap = () => {
     return mensaje;
