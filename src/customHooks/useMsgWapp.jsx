@@ -10,37 +10,38 @@ export default function useMensageWap(
   listaBajas,
   user
 ) {
-
   const lista = Array.from({ length: listado }, (v, i) => i + 1);
 
-
-  const NOMBRE_EVENTO = `
-  *${nombre}*
-  📍 ${lugar}
-  ${maps ? maps : ""}
-  📅 ${dia}${hora ? ' | '+hora+" hs" : ""}
-  `;
-  const LUGAR_EVENTO = `%0D%0A📍 ${lugar}%0D%0A`;
-  const LINK_EVENTO = `%0D%0A${maps}%0D%0A`;
-  const DIA_EVENTO = `%0D%0A📅 ${dia}%0D%0A`;
-  const HORARIO_EVENTO = `%0D%0ALISTADO PIZZAS (${hora})%0D%0A`;
-  const DESCRIPCION_EVENTO = `%0D%0A📝 ${descripcion}%0D%0A`;
-  const LISTADO_EVENTO = `%0D%0A${lista
-    .map(
-      (item, index) =>{
-        if (index === 0 && user) {
-            return `${item}. %0D%0A`
-        }
+  const NOMBRE_EVENTO = `*${nombre}*`;
+  const LUGAR_EVENTO = `📍 ${lugar.length > 3 ? lugar : "Lugar a definir."}`;
+  const LINK_EVENTO = `${maps ? maps : ""}`;
+  const DIA_EVENTO = `📅 ${dia ? dia : "Fecha a definir."}`;
+  const HORARIO_EVENTO = `| ${hora ? hora + " hs" : ""})`;
+  const FECHA_EVENTO = `${DIA_EVENTO} ${HORARIO_EVENTO})`;
+  const DESCRIPCION_EVENTO = `📝 ${descripcion}`;
+  const LISTADO_EVENTO = `${lista
+    .map((item, index) => {
+      if (index === 0 && user) {
+        return `${item}. ${user}`;
+      } else {
+        return `${item}. `;
       }
-    )
+    })
     .join("")}`;
-  const LINEAS = `-----------------------------`;
-  const BAJAS_EVENTO = `%0D%0ALISTADO PIZZAS ()%0D%0A`;
+  const BAJAS_EVENTO = `-----------------------------
+  👎 Bajas:`;
 
+  const FOOTER = `_Creado con: https://wapp.com_`;
 
-  const FOOTER = `%0D%0A%0D%0A_Creado con: https://wapp.com_`;
-
-  const mensaje = `${NOMBRE_EVENTO}`;
+  const mensaje = `${NOMBRE_EVENTO}
+  ${LUGAR_EVENTO}
+  ${LINK_EVENTO}
+  ${FECHA_EVENTO}
+  ${DESCRIPCION_EVENTO}
+  ${LISTADO_EVENTO}
+  ${BAJAS_EVENTO}
+  ${FOOTER}
+  `;
 
   const crearMsgWap = () => {
     return mensaje;
