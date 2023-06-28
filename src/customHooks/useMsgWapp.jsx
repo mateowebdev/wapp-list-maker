@@ -34,7 +34,7 @@ export default function useMensageWap(
   const LUGAR_EVENTO = `${
     lugar.length > 3 ? "📌 " + lugar.trim() : "📌 Lugar a definir."
   }`;
-  const LINK_EVENTO = `${maps ? maps.trim() : ""}`;
+  const LINK_EVENTO = `${maps.trim() !== "" && maps.trim()}`;
 
   const DIA_EVENTO = `${dia ? "📅 " + fechaParseada : "📅 Fecha a definir."}`;
   const HORARIO_EVENTO = `${hora ? "| ⏰ " + hora.trim() + " hs" : ""}`;
