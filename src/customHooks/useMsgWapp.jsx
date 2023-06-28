@@ -67,9 +67,9 @@ _Creado con: ${url}_`;
 
   // const mensaje = NOMBRE_EVENTO+LUGAR_EVENTO+LINK_EVENTO+FECHA_EVENTO+DESCRIPCION_EVENTO+LISTADO_EVENTO+`${listaBajas ? BAJAS_EVENTO : ''}`+FOOTER;
 
-  const mensaje = [NOMBRE_EVENTO, LUGAR_EVENTO, LINK_EVENTO, FECHA_EVENTO].join(
-    SALTO_LINEA
-  );
+  const mensaje = [NOMBRE_EVENTO, LUGAR_EVENTO, LINK_EVENTO, FECHA_EVENTO]
+    .filter((section) => section !== false)
+    .join(SALTO_LINEA);
 
   const crearMsgWap = () => {
     return mensaje;
