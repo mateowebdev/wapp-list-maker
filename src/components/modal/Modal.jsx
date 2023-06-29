@@ -35,8 +35,7 @@ export default function Modal({ user, evento, handleModal }) {
 
   const handleShare = async () => {
     const mensaje = crearMsgWap();
-    //const url = `https://wa.me/5492995965043?text=${mensaje}`;
-    //window.open(url, "_blank");
+    // console.log(mensaje);
 
     if (navigator.share) {
       await navigator

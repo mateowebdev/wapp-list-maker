@@ -220,7 +220,7 @@ export default function Main({ user, evento, handleEvento }) {
             onChange={(e) => handleInput(e)}
             id="descripcion"
             type="text"
-            placeholder="Conseguir los paasajes con tiempo."
+            placeholder="Conseguir los pasajes con tiempo."
             className="p-2 rounded bg-white dark:bg-dark-fondo-claro"
           />
         </div>

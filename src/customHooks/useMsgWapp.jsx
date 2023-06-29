@@ -31,20 +31,18 @@ export default function useMensageWap(
 `;
 
   const NOMBRE_EVENTO = `*${nombre.toUpperCase().trim()}*`;
-  const LUGAR_EVENTO = `${
-    lugar.length > 3 ? "📌 " + lugar.trim() : "📌 Lugar a definir."
-  }`;
+  const LUGAR_EVENTO = `${lugar.length > 0 && "📌 " + lugar.trim()}`;
   const LINK_EVENTO = `${maps.trim() !== "" && maps.trim()}`;
 
-  const DIA_EVENTO = `${dia ? "📅 " + fechaParseada : "📅 Fecha a definir."}`;
-  const HORARIO_EVENTO = `${hora ? "| ⏰ " + hora.trim() + " hs" : ""}`;
-  const FECHA_EVENTO = `${DIA_EVENTO} ${HORARIO_EVENTO}`;
+  const DIA_EVENTO = `${dia && "📅 " + fechaParseada + " "}`;
+  const HORARIO_EVENTO = `${hora && "⏰ " + hora.trim() + " hs"}`;
+  const FECHA_EVENTO = [DIA_EVENTO, HORARIO_EVENTO]
+    .filter((item) => item !== "false" && item !== "")
+    .join("");
 
   const DESCRIPCION_EVENTO = `${
-    descripcion ? "📝 _" + descripcion.trim() + "_" : ""
-  }
-  
-`;
+    descripcion && "📝 _" + descripcion.trim() + "_"
+  }`;
 
   const LISTADO_EVENTO = `${lista
     .map((item, index) => {
@@ -61,15 +59,25 @@ export default function useMensageWap(
   const BAJAS_EVENTO = `-----------------------------
 👎 Bajas:`;
 
-  const FOOTER = `  
+  const FOOTER = `_Creado con: ${url}_`;
 
-_Creado con: ${url}_`;
-
-  // const mensaje = NOMBRE_EVENTO+LUGAR_EVENTO+LINK_EVENTO+FECHA_EVENTO+DESCRIPCION_EVENTO+LISTADO_EVENTO+`${listaBajas ? BAJAS_EVENTO : ''}`+FOOTER;
-
-  const mensaje = [NOMBRE_EVENTO, LUGAR_EVENTO, LINK_EVENTO, FECHA_EVENTO]
-    .filter((section) => section !== false)
+  const mensaje = [
+    NOMBRE_EVENTO,
+    LUGAR_EVENTO,
+    LINK_EVENTO,
+    FECHA_EVENTO,
+    DESCRIPCION_EVENTO,
+    SALTO_LINEA,
+    LISTADO_EVENTO,
+    BAJAS_EVENTO,
+    SALTO_LINEA,
+    SALTO_LINEA,
+    FOOTER,
+  ]
+    .filter((section) => section !== "false" && section !== "")
     .join(SALTO_LINEA);
+
+  console.log(typeof LINK_EVENTO);
 
   const crearMsgWap = () => {
     return mensaje;
