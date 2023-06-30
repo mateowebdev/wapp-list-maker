@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 
@@ -10,7 +10,12 @@ import fondo from "./assets/wapp-bg.png";
 import Modal from "./components/modal/Modal";
 
 function App() {
-  const [temaOscuro, setTema] = useState(JSON.parse(localStorage.getItem("theme")) || false);
+  const [temaOscuro, setTema] = useState(
+    JSON.parse(localStorage.getItem("theme")) || false
+  );
+  const [tooltip, setTooltip] = useState(false);
+  const [modal, setModal] = useState(false);
+
   const [user, setUser] = useState(localStorage.getItem("user") || "");
   const [evento, setEvento] = useState({
     nombre: "",
@@ -23,34 +28,34 @@ function App() {
     primero: false,
     listaBajas: false,
   });
-  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setTooltip(false), 2000);
+    return () => clearTimeout(timer);
+  }, [tooltip]);
 
   const handleUser = (nombre) => {
     setUser(nombre);
-    console.log(user);
   };
 
   const handleTema = () => {
-    localStorage.setItem("theme",!temaOscuro);
+    localStorage.setItem("theme", !temaOscuro);
     setTema(!temaOscuro);
   };
   const handleModal = () => {
-   
     setModal(!modal);
   };
 
   const handleEvento = (evento) => {
     setEvento((prev) => ({ ...prev, ...evento }));
 
-    if (evento.primero && user==="") {
-      alert("Agrega tu nombre en la barra superior, haciendo click en el icono de usuario.")
-     return 
+    if (evento.primero && user === "") {
+      setTooltip(true);
+      return;
     }
 
-    setModal(!modal)
-    console.log(evento);
+    setModal(!modal);
   };
-
 
   return (
     <div
@@ -69,9 +74,10 @@ function App() {
         handleUser={handleUser}
         handleTema={handleTema}
         temaOscuro={temaOscuro}
+        tooltip={tooltip}
       />
       <Main user={user} evento={evento} handleEvento={handleEvento} />
-      {modal && <Modal user={user} evento={evento} handleModal={handleModal}/>}
+      {modal && <Modal user={user} evento={evento} handleModal={handleModal} />}
     </div>
   );
 }

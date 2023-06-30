@@ -33,6 +33,16 @@ export default function Modal({ user, evento, handleModal }) {
     url
   ); // mandar parametros
 
+  const semana = [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+  ];
+
   const handleShare = async () => {
     const mensaje = crearMsgWap();
     // console.log(mensaje);
@@ -58,15 +68,16 @@ export default function Modal({ user, evento, handleModal }) {
       }}
     >
       <div className="bg-fondo-claro dark:bg-dark-fondo-claro dark:text-dark-gris rounded w-full p-4">
-        <p className="font-bold uppercase">{nombre}</p>
-        {lugar && <p>📍 {lugar}</p>}
+        <p className="font-bold uppercase">{nombre.trim()}</p>
+        {lugar && <p>📌 {lugar}</p>}
         {maps && <p className="text-blue-400">{maps}</p>}
         {dia && (
           <p>
             <span>
-              📆 {new Date(dia.replaceAll("-", "/")).toLocaleDateString()}{" "}
+              📆 {semana[new Date(dia.replaceAll("-", "/")).getDay()]}{" "}
+              {new Date(dia.replaceAll("-", "/")).toLocaleDateString()}{" "}
             </span>
-            {hora && <span>| {hora} hs</span>}
+            {hora && <span>⏰ {hora} hs</span>}
           </p>
         )}
         {descripcion && <p className="italic">📝 {descripcion}</p>}

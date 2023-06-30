@@ -44,20 +44,21 @@ export default function useMensageWap(
     descripcion && "📝 _" + descripcion.trim() + "_"
   }`;
 
-  const LISTADO_EVENTO = `${lista
-    .map((item, index) => {
-      if (index === 0 && primero) {
-        return `${item}. ${user}
+  const LISTADO_EVENTO = `
+${lista
+  .map((item, index) => {
+    if (index === 0 && primero) {
+      return `${item}. ${user}
 `;
-      } else {
-        return `${item}. 
+    } else {
+      return `${item}. 
 `;
-      }
-    })
-    .join("")}`;
+    }
+  })
+  .join("")}`;
 
-  const BAJAS_EVENTO = `-----------------------------
-👎 Bajas:`;
+  const LINEA_DIVISORIA = `${listaBajas && "-----------------------------"}`;
+  const BAJAS_EVENTO = `${listaBajas && "👎 Bajas:"}`;
 
   const FOOTER = `_Creado con: ${url}_`;
 
@@ -67,17 +68,16 @@ export default function useMensageWap(
     LINK_EVENTO,
     FECHA_EVENTO,
     DESCRIPCION_EVENTO,
-    SALTO_LINEA,
     LISTADO_EVENTO,
+    LINEA_DIVISORIA,
     BAJAS_EVENTO,
-    SALTO_LINEA,
     SALTO_LINEA,
     FOOTER,
   ]
-    .filter((section) => section !== "false" && section !== "")
+    .filter(
+      (section) => section !== false && section !== "false" && section !== ""
+    )
     .join(SALTO_LINEA);
-
-  console.log(typeof LINK_EVENTO);
 
   const crearMsgWap = () => {
     return mensaje;

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { FiMap } from "react-icons/fi";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
-export default function Main({ user, evento, handleEvento }) {
+export default function Main({ evento, handleEvento }) {
   const formRef = useRef(null);
   const [link, setLink] = useState(false);
 
@@ -226,7 +226,7 @@ export default function Main({ user, evento, handleEvento }) {
         </div>
         <div className="flex items-end">
           <div className="flex flex-col">
-            <label htmlFor="listado">Listar numeros</label>
+            <label htmlFor="listado">Pre listar numeros</label>
             <input
               name="listado"
               value={listado}
