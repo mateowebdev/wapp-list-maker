@@ -25,7 +25,9 @@ export default function Header({
 
   return (
     <div className="bg-wapp-verde dark:bg-dark-fondo-claro p-4 md:hidden">
-      <h1 className="text-white text-center text-xl font-bold">ListaMaker</h1>
+      <h1 className="text-white text-center text-xl font-bold">
+        WhatsApp Listados
+      </h1>
       <div className="flex justify-between items-center">
         <div
           onClick={handleTema}

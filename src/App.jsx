@@ -63,6 +63,7 @@ function App() {
       }`}
       style={{
         backgroundImage: `url(${fondo})`,
+        backgroundBlendMode: "overlay",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
