@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Footer from "./components/footer/Footer";
+import Modal from "./components/modal/Modal";
+import MediaQuery from "./components/mediaQuery";
 
 import fondo from "./assets/wapp-bg.png";
-import Modal from "./components/modal/Modal";
 
 function App() {
   const [temaOscuro, setTema] = useState(
@@ -59,7 +58,7 @@ function App() {
 
   return (
     <div
-      className={`h-full min-h-screen flex flex-col ${
+      className={`h-full min-h-screen flex flex-col md:justify-center md:items-center ${
         temaOscuro ? "dark bg-dark-fondo" : "bg-fondo"
       }`}
       style={{
@@ -69,6 +68,7 @@ function App() {
         backgroundPosition: "center",
       }}
     >
+      <MediaQuery></MediaQuery>
       <Header
         user={user}
         handleUser={handleUser}

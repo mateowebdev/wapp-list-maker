@@ -129,7 +129,7 @@ export default function Main({ evento, handleEvento }) {
   };
 
   return (
-    <div className="flex-grow text-gris dark:text-dark-gris  p-8">
+    <div className="flex-grow text-gris dark:text-dark-gris p-8 md:hidden">
       <form
         ref={formRef}
         autoComplete="off"

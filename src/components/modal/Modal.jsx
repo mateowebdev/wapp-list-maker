@@ -62,7 +62,7 @@ export default function Modal({ user, evento, handleModal }) {
 
   return (
     <div
-      className="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm w-full h-screen p-5 absolute flex flex-col justify-center items-center gap-4"
+      className="md:hidden bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm w-full h-screen p-5 absolute flex flex-col justify-center items-center gap-4"
       style={{
         minHeight: "100svh",
       }}
