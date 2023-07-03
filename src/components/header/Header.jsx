@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaRegMoon } from "react-icons/fa";
 import { BsSun } from "react-icons/bs";
+import letters from "../../assets/letters-logo.svg";
 
 export default function Header({
   user,
@@ -24,11 +25,12 @@ export default function Header({
   };
 
   return (
-    <div className="bg-wapp-verde dark:bg-dark-fondo-claro p-4 md:hidden">
-      <h1 className="text-white text-center text-xl font-bold">
+    <div className="bg-wapp-verde dark:bg-dark-fondo-claro flex flex-col justify-center items-center p-4 md:hidden">
+      <img src={letters} alt="logo" width={200} />
+      {/* <h1 className="text-white text-center text-xl font-bold">
         WhatsApp Listados
-      </h1>
-      <div className="flex justify-between items-center">
+      </h1> */}
+      <div className="flex justify-between items-center w-full">
         <div
           onClick={handleTema}
           className="flex gap-1 text-white rounded-full bg-white bg-opacity-20 outline-none"
